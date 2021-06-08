@@ -28,18 +28,7 @@ zip_file_2 = ZipFile('recipes.json.zip')
 json_file = zip_file_2.extractall()
 Part = st.sidebar.selectbox('Select the parts one by one:', ('Part 0', 'Parts 1-2', 'Parts 3-4', 'Part 5', 'Part 6'))
 if Part == 'Part 0':
-    pygame.mixer.init()
-    st.write("### While working with this project, you'll be able to find some information about your "
-             "body advice on how you should treat it depending on some information provided by you. "
-             "These advice are completely optional, I don't insist on you changing your life the way shown below. "
-             "You should love yourself the way you look and feel :)" )
-    Quest = st.selectbox("Want to get the right mood?", ('No', 'Yes'))
-    if Quest == 'Yes':
-        mixer.music.load("Music.mp3")
-        mixer.music.play(-1)
-        st.write("##### If you get tired of the music, change the option back to 'No'")
-    else:
-        mixer.music.stop()
+    st.write('Lol')
 if Part == 'Parts 1-2':
     weight = int(st.number_input('Enter your weight (in kg): ', ))
     height = int(st.number_input('Enter your height (in cm): ', ))
