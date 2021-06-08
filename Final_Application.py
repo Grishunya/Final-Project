@@ -110,13 +110,13 @@ if Part == 'Parts 1-2':
         if age != 0:
             with st.echo(code_location='below'):
                 from selenium.webdriver.chrome.options import Options
-                r = ChromeDriverManager().install()
+                r = os.getcwd() + '/chromedriver'
                 options = Options()
                 options.headless = True
                 os.chmod(r, 755)
                 driver = webdriver.Chrome(r, options=options)
-                driver.get('http://bmijs.is.tuebingen.mpg.de/body_masses/generate_bmi?utf8=✓&locale=en&body_mass%5Bunit_measurment%5D=M&body_mass%5Bgender%5D=' + 'Male' + '&body_mass%5Bage%5D=' + '19' + '&body_mass%5Bheight%5D=' + '1.82' + '&body_mass%5Bfeet%5D=&body_mass%5Binches%5D=&body_mass%5Bweight%5D=' + '68' + '&commit=Calculate+BMI')
-                time.sleep(5) # The page has some animation to load
+                driver.get('http://bmijs.is.tuebingen.mpg.de/body_masses/generate_bmi?utf8=✓&locale=en&body_mass%5Bunit_measurment%5D=M&body_mass%5Bgender%5D=' + Gender.capitalize() + '&body_mass%5Bage%5D=' + str(age) + '&body_mass%5Bheight%5D=' + str(height/100) + '&body_mass%5Bfeet%5D=&body_mass%5Binches%5D=&body_mass%5Bweight%5D=' + str(weight) + '&commit=Calculate+BMI')
+                time.sleep(15) # The page has some animation to load
                 driver.save_screenshot('body.png')
                 driver.quit()
                 st.write('Your BMI is', BMI)
@@ -133,7 +133,6 @@ if Part == 'Parts 1-2':
             checker = 1
             if checker == 1:
                 with st.echo(code_location='below'):
-                    r = ChromeDriverManager().install()
                     driver = webdriver.Chrome(r, options=options)
                     driver.get(url)
                     element = driver.find_element_by_name('cheightmeter')
@@ -148,9 +147,6 @@ if Part == 'Parts 1-2':
                     finally:
                         content = driver.page_source
                         driver.quit()
-                    # I hope that you will be able to tune the browser so that the code runs correctly,
-                    # but in case it does not, uncomment run the following cell, and ignore the one after:
-                    # Calories = 2000
                     all_plans = BeautifulSoup(content).find_all('b')[0:7]
                     if No == 0:
                         Calories = all_plans[5].text
