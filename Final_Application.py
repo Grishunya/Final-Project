@@ -109,7 +109,7 @@ if Part == 'Parts 1-2':
         checker = 0
         if age != 0:
             with st.echo(code_location='below'):
-                r = os.getcwd() + '/chromedriver/chromedriver.exe'
+                r = os.getcwd() + '/chromedriver'
                 driver = webdriver.Chrome(r)
                 driver.get('http://bmijs.is.tuebingen.mpg.de/body_masses/generate_bmi?utf8=✓&locale=en&body_mass%5Bunit_measurment%5D=M&body_mass%5Bgender%5D=' + 'Male' + '&body_mass%5Bage%5D=' + '19' + '&body_mass%5Bheight%5D=' + '1.82' + '&body_mass%5Bfeet%5D=&body_mass%5Binches%5D=&body_mass%5Bweight%5D=' + '68' + '&commit=Calculate+BMI')
                 time.sleep(5) # The page has some animation to load
