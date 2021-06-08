@@ -81,10 +81,10 @@ if Part == 'Parts 1-2':
     if Ticker:
         st.write('## Part 2: Websites')
         st.write("#### This part contains working with selenium, which requires using a browser you work with. "
-             "I have been working with Safari, but in case you have another one, change it in the code, "
-             "or specify the path. You may also be asked to allow remote automation for the code to run. "
-             "I have written similar messages when the package is used, but it's better to be aware of these "
-             "problems in advance.")
+                 "I have been working with Safari, but in case you have another one, change it in the code, "
+                 "or specify the path. You may also be asked to allow remote automation for the code to run. "
+                 "I have written similar messages when the package is used, but it's better to be aware of these "
+                 "problems in advance.")
         Gender = gender_reveal(my_gender)
         age = 0
         with st.echo(code_location='below'):
@@ -108,7 +108,7 @@ if Part == 'Parts 1-2':
         checker = 0
         if age != 0:
             with st.echo(code_location='below'):
-                driver = webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.GOOGLE).install())
+                driver = webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.GOOGLE, version='91').install())
                 driver.get('http://bmijs.is.tuebingen.mpg.de/body_masses/generate_bmi?utf8=✓&locale=en&body_mass%5Bunit_measurment%5D=M&body_mass%5Bgender%5D=' + Gender.capitalize() + '&body_mass%5Bage%5D=' + str(age) + '&body_mass%5Bheight%5D=' + str(height/100) + '&body_mass%5Bfeet%5D=&body_mass%5Binches%5D=&body_mass%5Bweight%5D=' + str(weight) + '&commit=Calculate+BMI')
                 time.sleep(5) # The page has some animation to load
                 driver.save_screenshot('body.png')
@@ -127,7 +127,7 @@ if Part == 'Parts 1-2':
             checker = 1
             if checker == 1:
                 with st.echo(code_location='below'):
-                    driver = webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.GOOGLE).install())
+                    driver = webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.GOOGLE, version='91').install())
                     driver.get(url)
                     element = driver.find_element_by_name('cheightmeter')
                     element.send_keys(str(Info[0]))
@@ -202,7 +202,7 @@ if Part == 'Parts 3-4':
         factor = (int(Calories)/Plan.sum()['calories']).round(1)
         st.write(Plan)
     st.write("### You have seen a meal plan that may work for you. "
-                         "If you don't like the meals, you may rerun the cells above and get another list of foods "
+             "If you don't like the meals, you may rerun the cells above and get another list of foods "
              "(When working with code itself), or reload the page.")
     with st.echo(code_location='below'):
         st.write("### Creating a file with your meals:")
@@ -230,10 +230,10 @@ if Part == 'Parts 3-4':
         f.close()
     with st.echo(code_location='below'):
         st.write("### Since I have decided to create this project using streamlit,"
-                         "the file may be unreachable to you. "
-                         "That's why I have decided to write it here line by line for you:"
-                         ""
-                         "")
+                 "the file may be unreachable to you. "
+                 "That's why I have decided to write it here line by line for you:"
+                 ""
+                 "")
         R = open('Meal plan.txt')
         for line in R:
             st.write(line)
@@ -287,9 +287,9 @@ if Part == 'Parts 3-4':
                  "\n"
                  "p1 <- ggplot(Tibble_data, aes(x = rating, y = fat)) + geom_smooth(method = 'loess' , fill = 'lightblue', formula = 'y ~ x')"
                  "\n"
-                 "p2 <- ggplot(Tibble_data, aes(x = rating, y = calories, fill = Meal)) + geom_boxplot(size = 0.25) + theme(legend.position='none')" 
+                 "p2 <- ggplot(Tibble_data, aes(x = rating, y = calories, fill = Meal)) + geom_boxplot(size = 0.25) + theme(legend.position='none')"
                  "\n"
-                 "p3 <- ggplot(Tibble_data, aes(x = rating, y = protein, fill = Meal)) + geom_col(width = 0.5)  + coord_polar(theta = 'y')" 
+                 "p3 <- ggplot(Tibble_data, aes(x = rating, y = protein, fill = Meal)) + geom_col(width = 0.5)  + coord_polar(theta = 'y')"
                  "\n"
                  "myplot <- p1 / (p2 | p3)"
                  "\n"
@@ -336,17 +336,17 @@ if Part == 'Part 5':
         # Lon = []
         # Lat = []
         # for i in range(len(Gyms)):
-            # text = Gyms.iloc[i]['Address']
-            # resp = requests.get('http://api.positionstack.com/v1/forward?access_key=' + API_Key + '&query=Москва,' + text)
-            # resp_json_payload = resp.json()
-            # try:
-                # lng = resp_json_payload['data'][0]['longitude']
-                # Lon.append(lng)
-                # lat = resp_json_payload['data'][0]['latitude']
-                # Lat.append(lat)
-            # except:
-                # Lon.append(None)
-                # Lat.append(None)
+        # text = Gyms.iloc[i]['Address']
+        # resp = requests.get('http://api.positionstack.com/v1/forward?access_key=' + API_Key + '&query=Москва,' + text)
+        # resp_json_payload = resp.json()
+        # try:
+        # lng = resp_json_payload['data'][0]['longitude']
+        # Lon.append(lng)
+        # lat = resp_json_payload['data'][0]['latitude']
+        # Lat.append(lat)
+        # except:
+        # Lon.append(None)
+        # Lat.append(None)
         # Geos = pd.DataFrame({'lon' : Lon, 'lat' : Lat})
         # Geos.to_csv('Geos.csv')
         Geos = pd.read_csv('Geos.csv')
@@ -432,7 +432,7 @@ if Part == 'Part 6':
             else:
                 alignment = "left"
             ax.text(x = angle, y = lowerLimit + bar.get_height() + 3, s = label, ha = alignment,
-                va = 'center', rotation = rotation, rotation_mode = "anchor")
+                    va = 'center', rotation = rotation, rotation_mode = "anchor")
         st.pyplot(plt.show())
     with st.echo(code_location='below'):
         fig = go.Figure(go.Bar(x = fourth_df['Calories per kg'], y = fourth_df['Activity (1 hr)'], orientation='h'))
