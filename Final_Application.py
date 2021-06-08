@@ -20,6 +20,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from PIL import Image
 import time
 from zipfile import ZipFile
+from webdriver_manager.chrome import ChromeDriverManager
 zip_file = ZipFile('recipes.csv.zip')
 csv_file = zip_file.extractall()
 zip_file_2 = ZipFile('Recipes.json.zip')
@@ -107,7 +108,7 @@ if Part == 'Parts 1-2':
         checker = 0
         if age != 0:
             with st.echo(code_location='below'):
-                driver = webdriver.Chrome()
+                driver = webdriver.Chrome(ChromeDriverManager().install())
                 driver.get('http://bmijs.is.tuebingen.mpg.de/body_masses/generate_bmi?utf8=✓&locale=en&body_mass%5Bunit_measurment%5D=M&body_mass%5Bgender%5D=' + Gender.capitalize() + '&body_mass%5Bage%5D=' + str(age) + '&body_mass%5Bheight%5D=' + str(height/100) + '&body_mass%5Bfeet%5D=&body_mass%5Binches%5D=&body_mass%5Bweight%5D=' + str(weight) + '&commit=Calculate+BMI')
                 time.sleep(5) # The page has some animation to load
                 driver.save_screenshot('body.png')
@@ -127,7 +128,7 @@ if Part == 'Parts 1-2':
             # If you are using a browser other than Safari, change it in the next cell
             if checker == 1:
                 with st.echo(code_location='below'):
-                    driver = webdriver.Chrome()
+                    driver = webdriver.Chrome(ChromeDriverManager().install())
                     driver.get(url)
                     element = driver.find_element_by_name('cheightmeter')
                     element.send_keys(str(Info[0]))
