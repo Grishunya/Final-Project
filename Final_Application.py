@@ -107,7 +107,7 @@ if Part == 'Parts 1-2':
         checker = 0
         if age != 0:
             with st.echo(code_location='below'):
-                driver = webdriver.Chrome("/Users/grigorijbugaev/opt/anaconda3/bin:/Users/grigorijbugaev/opt/anaconda3/condabin:/Library/Frameworks/Python.framework/Versions/3.7/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/grigoriybugaev/Documents/WebDriver:/Library/TeX/texbin")
+                driver = webdriver.Chrome()
                 driver.get('http://bmijs.is.tuebingen.mpg.de/body_masses/generate_bmi?utf8=✓&locale=en&body_mass%5Bunit_measurment%5D=M&body_mass%5Bgender%5D=' + Gender.capitalize() + '&body_mass%5Bage%5D=' + str(age) + '&body_mass%5Bheight%5D=' + str(height/100) + '&body_mass%5Bfeet%5D=&body_mass%5Binches%5D=&body_mass%5Bweight%5D=' + str(weight) + '&commit=Calculate+BMI')
                 time.sleep(5) # The page has some animation to load
                 driver.save_screenshot('body.png')
