@@ -12,17 +12,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import plotly.graph_objects as go
 from pathlib import Path
-from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from PIL import Image
-import time
 from zipfile import ZipFile
-from webdriver_manager.chrome import ChromeDriverManager
-from webdriver_manager.utils import ChromeType
-import os
 zip_file = ZipFile('recipes.csv.zip')
 csv_file = zip_file.extractall()
 zip_file_2 = ZipFile('Recipes.json.zip')
@@ -69,7 +59,7 @@ if Part == 'Parts 1-2':
     check_p = st.selectbox('Please, tell me, if the prediction is correct', ('Yes', 'No'))
     with st.echo(code_location='below'):
         if check_p == 'Yes':
-            st.write('Great! It has worked for you')
+            st.write('Great! It has worked for you correctly')
         else:
             st.write('Probably, there was not enough information to predict your gender precisely enough.')
             st.write('You seem to be different from thousands of people, which is amazing :)')
@@ -81,15 +71,10 @@ if Part == 'Parts 1-2':
     Ticker = st.checkbox('Open part 2', )
     if Ticker:
         st.write('## Part 2: Websites')
-        st.write("#### This part contains working with selenium, which requires using a browser you work with. "
-                 "I have been working with Safari, but in case you have another one, change it in the code, "
-                 "or specify the path. You may also be asked to allow remote automation for the code to run. "
-                 "I have written similar messages when the package is used, but it's better to be aware of these "
-                 "problems in advance.")
         Gender = gender_reveal(my_gender)
         age = 0
         with st.echo(code_location='below'):
-            age = int(st.number_input('Enter your age:', ))
+            age = max(18, int(st.number_input('Enter your age:', )))
             Info = [height, weight, age, Gender]
             Outcomes = ['Underweight', 'Healthy weight', 'Overweight', 'Obese']
             BMI = round(weight / ((height / 100) ** 2), 1)
@@ -108,64 +93,25 @@ if Part == 'Parts 1-2':
             No = Outcomes.index(State)
         checker = 0
         if age != 0:
-            with st.echo(code_location='below'):
-                from selenium.webdriver.chrome.options import Options
-                r = os.getcwd() + '/chromedriver'
-                options = Options()
-                options.headless = True
-                os.chmod(r, 755)
-                driver = webdriver.Chrome(r, options=options)
-                driver.get('http://bmijs.is.tuebingen.mpg.de/body_masses/generate_bmi?utf8=✓&locale=en&body_mass%5Bunit_measurment%5D=M&body_mass%5Bgender%5D=' + Gender.capitalize() + '&body_mass%5Bage%5D=' + str(age) + '&body_mass%5Bheight%5D=' + str(height/100) + '&body_mass%5Bfeet%5D=&body_mass%5Binches%5D=&body_mass%5Bweight%5D=' + str(weight) + '&commit=Calculate+BMI')
-                time.sleep(15) # The page has some animation to load
-                driver.save_screenshot('body.png')
-                driver.quit()
-                st.write('Your BMI is', BMI)
-                st.write('This is how your body is predicted to look like:')
-                st.image(Image.open('body.png'))
-                if No == 0:
-                    st.write('You are', str.lower(State) + ". Let's work on gaining weight plans.")
-                elif No == 1:
-                    st.write('You are a', str.lower(State) + ". Let's work on maintaining weight plans.")
-                else:
-                    st.write('You are', str.lower(State) + ". Let's work on losing weight plans.")
-
-            st.write("### Let's get deeper and find what's your daily calorie intake value should be:")
-            checker = 1
-            if checker == 1:
-                with st.echo(code_location='below'):
-                    driver = webdriver.Chrome(r, options=options)
-                    driver.get(url)
-                    element = driver.find_element_by_name('cheightmeter')
-                    element.send_keys(str(Info[0]))
-                    element = driver.find_element_by_name('cage')
-                    element.send_keys(str(Info[2]))
-                    element = driver.find_element_by_name('ckg')
-                    element.send_keys(str(Info[1]) + Keys.RETURN)
-                    try:
-                        elem = WebDriverWait(driver, 10).until(
-                            EC.presence_of_element_located((By.CLASS_NAME, "result_box")))
-                    finally:
-                        content = driver.page_source
-                        driver.quit()
-                    all_plans = BeautifulSoup(content).find_all('b')[0:7]
-                    if No == 0:
-                        Calories = all_plans[5].text
-                    elif No == 1:
-                        Calories = all_plans[0].text
-                    elif No == 2:
-                        Calories = all_plans[1].text
-                    else:
-                        Calories = all_plans[2].text
-                    st.write('To achieve the set goal, you should consume', Calories, 'calories daily')
-                    st.write('Please, remember this value. it will be asked in the following part')
-                st.write('### This is the end of the 2nd part')
+            st.write("### I am really sorry for this one, but I couldn't find a way to use selenium with streamlit."
+                     "I have tried lots and lots of solutions, and have tried to deploy this application for more than"
+                     "30 times, but everytime I got some kind of errors.")
+            st.write("#### However, my code is completely fine, and the problem here is the incompatibility of selenium"
+                     "and streamlit when deploying with Heroku, because everything had been working just fine when"
+                     "I have tried this code through PyCharm.")
+            st.write("#### That's why I want you to open a notebook named 'Websites' and run the code there.")
+            st.write("#### Afterwards, come back here and continue your journey.")
+            st.write("#### I insist on you checking the ipynb file before going any further, because this is the "
+                     "chronological order that I have desired my project to work in.")
+            st.write('## Thank you for understanding')
+            st.write('### This is the end of the 2nd part')
 if Part == 'Parts 3-4':
     Calories = st.number_input('Please, specify the amount of calories you were recommended:', )
     st.write("###### I couldn't get the value from the previous page because multi-page"
              " working with streamlit doesn't allow it" )
     st.write('## Part 3: Tables')
     with st.echo(code_location='below'):
-        Meals = pd.read_csv('recipes.csv')
+        Meals = pd.read_csv('Recipes.csv')
         # Data retrieved from https://www.kaggle.com/hugodarwood/epirecipes
         st.write(Meals.sample(2))
     st.write("#### Let's get rid of the most columns that we won't need:")
@@ -205,7 +151,7 @@ if Part == 'Parts 3-4':
         factor = (int(Calories)/Plan.sum()['calories']).round(1)
         st.write(Plan)
     st.write("### You have seen a meal plan that may work for you. "
-             "If you don't like the meals, you may rerun the cells above and get another list of foods "
+                         "If you don't like the meals, you may rerun the cells above and get another list of foods "
              "(When working with code itself), or reload the page.")
     with st.echo(code_location='below'):
         st.write("### Creating a file with your meals:")
@@ -233,10 +179,10 @@ if Part == 'Parts 3-4':
         f.close()
     with st.echo(code_location='below'):
         st.write("### Since I have decided to create this project using streamlit,"
-                 "the file may be unreachable to you. "
-                 "That's why I have decided to write it here line by line for you:"
-                 ""
-                 "")
+                         "the file may be unreachable to you. "
+                         "That's why I have decided to write it here line by line for you:"
+                         ""
+                         "")
         R = open('Meal plan.txt')
         for line in R:
             st.write(line)
@@ -262,7 +208,7 @@ if Part == 'Parts 3-4':
                  "and tibble for making tables, which is a part of tidyverse. You can find it in the 'R' folder")
 
         st.image('R/myplot.png')
-        st.write("Here's the code I've written in R:")
+        st.write("Here's the code I've ran in R:")
         st.write("\n"
                  "```{r}"
                  "\n"
@@ -290,9 +236,9 @@ if Part == 'Parts 3-4':
                  "\n"
                  "p1 <- ggplot(Tibble_data, aes(x = rating, y = fat)) + geom_smooth(method = 'loess' , fill = 'lightblue', formula = 'y ~ x')"
                  "\n"
-                 "p2 <- ggplot(Tibble_data, aes(x = rating, y = calories, fill = Meal)) + geom_boxplot(size = 0.25) + theme(legend.position='none')"
+                 "p2 <- ggplot(Tibble_data, aes(x = rating, y = calories, fill = Meal)) + geom_boxplot(size = 0.25) + theme(legend.position='none')" 
                  "\n"
-                 "p3 <- ggplot(Tibble_data, aes(x = rating, y = protein, fill = Meal)) + geom_col(width = 0.5)  + coord_polar(theta = 'y')"
+                 "p3 <- ggplot(Tibble_data, aes(x = rating, y = protein, fill = Meal)) + geom_col(width = 0.5)  + coord_polar(theta = 'y')" 
                  "\n"
                  "myplot <- p1 / (p2 | p3)"
                  "\n"
@@ -339,17 +285,17 @@ if Part == 'Part 5':
         # Lon = []
         # Lat = []
         # for i in range(len(Gyms)):
-        # text = Gyms.iloc[i]['Address']
-        # resp = requests.get('http://api.positionstack.com/v1/forward?access_key=' + API_Key + '&query=Москва,' + text)
-        # resp_json_payload = resp.json()
-        # try:
-        # lng = resp_json_payload['data'][0]['longitude']
-        # Lon.append(lng)
-        # lat = resp_json_payload['data'][0]['latitude']
-        # Lat.append(lat)
-        # except:
-        # Lon.append(None)
-        # Lat.append(None)
+            # text = Gyms.iloc[i]['Address']
+            # resp = requests.get('http://api.positionstack.com/v1/forward?access_key=' + API_Key + '&query=Москва,' + text)
+            # resp_json_payload = resp.json()
+            # try:
+                # lng = resp_json_payload['data'][0]['longitude']
+                # Lon.append(lng)
+                # lat = resp_json_payload['data'][0]['latitude']
+                # Lat.append(lat)
+            # except:
+                # Lon.append(None)
+                # Lat.append(None)
         # Geos = pd.DataFrame({'lon' : Lon, 'lat' : Lat})
         # Geos.to_csv('Geos.csv')
         Geos = pd.read_csv('Geos.csv')
@@ -435,7 +381,7 @@ if Part == 'Part 6':
             else:
                 alignment = "left"
             ax.text(x = angle, y = lowerLimit + bar.get_height() + 3, s = label, ha = alignment,
-                    va = 'center', rotation = rotation, rotation_mode = "anchor")
+                va = 'center', rotation = rotation, rotation_mode = "anchor")
         st.pyplot(plt.show())
     with st.echo(code_location='below'):
         fig = go.Figure(go.Bar(x = fourth_df['Calories per kg'], y = fourth_df['Activity (1 hr)'], orientation='h'))
