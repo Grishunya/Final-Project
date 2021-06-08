@@ -30,6 +30,13 @@ if Part == 'Part 0':
              "body advice on how you should treat it depending on some information provided by you. "
              "These advice are completely optional, I don't insist on you changing your life the way shown below. "
              "You should love yourself the way you look and feel :)" )
+    Quest = st.selectbox("Want to get the right mood?", ('', 'Yes','No'))
+    if Quest == 'Yes':
+        audio_file = open('Music.mp3', 'rb')
+        audio_bytes = audio_file.read()
+        st.audio(audio_bytes)
+    elif Quest == 'No':
+        st.write(':(')
 if Part == 'Parts 1-2':
     weight = int(st.number_input('Enter your weight (in kg): ', ))
     height = int(st.number_input('Enter your height (in cm): ', ))
