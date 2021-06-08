@@ -93,16 +93,11 @@ if Part == 'Parts 1-2':
             No = Outcomes.index(State)
         checker = 0
         if age != 0:
-            st.write("### I am really sorry for this one, but I couldn't find a way to use selenium with streamlit."
-                     "I have tried lots and lots of solutions, and have tried to deploy this application for more than"
-                     "30 times, but everytime I got some kind of errors.")
-            st.write("#### However, my code is completely fine, and the problem here is the incompatibility of selenium"
-                     "and streamlit when deploying with Heroku, because everything had been working just fine when"
-                     "I have tried this code through PyCharm.")
+            st.write("### I am really sorry for this one, but I couldn't find a way to use selenium with streamlit. I have tried lots and lots of solutions, and have tried to deploy this application more than 30 times, but every time I got some kind of errors.")
+            st.write("#### However, my code is completely fine, and the problem here is the incompatibility of selenium and streamlit when deploying with Heroku because everything had been working just fine when I have tried this code through PyCharm.")
             st.write("#### That's why I want you to open a notebook named 'Websites' and run the code there.")
-            st.write("#### Afterwards, come back here and continue your journey.")
-            st.write("#### I insist on you checking the ipynb file before going any further, because this is the "
-                     "chronological order that I have desired my project to work in.")
+            st.write("#### Afterward, come back here and continue your journey.")
+            st.write("#### I insist on you checking the ipynb file before going any further because this is the chronological order that I have desired my project to work in")
             st.write('## Thank you for understanding')
             st.write('### This is the end of the 2nd part')
 if Part == 'Parts 3-4':
