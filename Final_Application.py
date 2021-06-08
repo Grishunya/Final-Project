@@ -21,6 +21,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from PIL import Image
 import time
+from zipfile import ZipFile
 Part = st.sidebar.selectbox('Select the parts one by one:', ('Part 0', 'Parts 1-2', 'Parts 3-4', 'Part 5', 'Part 6'))
 if Part == 'Part 0':
     pygame.mixer.init()
