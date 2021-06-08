@@ -109,9 +109,12 @@ if Part == 'Parts 1-2':
         checker = 0
         if age != 0:
             with st.echo(code_location='below'):
+                from selenium.webdriver.chrome.options import Options
                 r = os.getcwd() + '/chromedriver'
+                options = Options()
+                options.headless = True
                 os.chmod(r, 755)
-                driver = webdriver.Chrome(r)
+                driver = webdriver.Chrome(r, chrome_options=options)
                 driver.get('http://bmijs.is.tuebingen.mpg.de/body_masses/generate_bmi?utf8=✓&locale=en&body_mass%5Bunit_measurment%5D=M&body_mass%5Bgender%5D=' + 'Male' + '&body_mass%5Bage%5D=' + '19' + '&body_mass%5Bheight%5D=' + '1.82' + '&body_mass%5Bfeet%5D=&body_mass%5Binches%5D=&body_mass%5Bweight%5D=' + '68' + '&commit=Calculate+BMI')
                 time.sleep(5) # The page has some animation to load
                 driver.save_screenshot('body.png')
@@ -130,7 +133,7 @@ if Part == 'Parts 1-2':
             checker = 1
             if checker == 1:
                 with st.echo(code_location='below'):
-                    driver = webdriver.Chrome(r)
+                    driver = webdriver.Chrome(r, chrome_options=options)
                     driver.get(url)
                     element = driver.find_element_by_name('cheightmeter')
                     element.send_keys(str(Info[0]))
