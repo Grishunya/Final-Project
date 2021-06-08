@@ -59,8 +59,9 @@ if Part == 'Parts 1-2':
     check_p = st.selectbox('Please, tell me, if the prediction is correct', ('Yes', 'No'))
     with st.echo(code_location='below'):
         if check_p == 'Yes':
-            st.write('Great! It has worked for you correctly')
+            st.write('Great! It has predicted your gender correctly')
         else:
+            st.write("Unfortunateely, the program couldn't predict your gender correctly.")
             st.write('Probably, there was not enough information to predict your gender precisely enough.')
             st.write('You seem to be different from thousands of people, which is amazing :)')
             if gender_reveal(my_gender) == 'female':
@@ -359,3 +360,4 @@ if Part == 'Part 6':
     with st.echo(code_location='below'):
         fig = go.Figure(go.Bar(x = fourth_df['Calories per kg'], y = fourth_df['Activity (1 hr)'], orientation='h'))
         st.write(fig)
+    st.write("This is the end of the project. Thank you for testing it!")
