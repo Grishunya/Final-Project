@@ -68,7 +68,7 @@ if Part == 'Parts 1-2':
     check_p = st.selectbox('Please, tell me, if the prediction is correct', ('Yes', 'No'))
     with st.echo(code_location='below'):
         if check_p == 'Yes':
-            st.write('Great! It has worked for you correctly')
+            st.write('Great! It has worked for you')
         else:
             st.write('Probably, there was not enough information to predict your gender precisely enough.')
             st.write('You seem to be different from thousands of people, which is amazing :)')
@@ -108,7 +108,7 @@ if Part == 'Parts 1-2':
         checker = 0
         if age != 0:
             with st.echo(code_location='below'):
-                driver = webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.GOOGLE, version='91').install())
+                driver = webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.GOOGLE).install())
                 driver.get('http://bmijs.is.tuebingen.mpg.de/body_masses/generate_bmi?utf8=✓&locale=en&body_mass%5Bunit_measurment%5D=M&body_mass%5Bgender%5D=' + Gender.capitalize() + '&body_mass%5Bage%5D=' + str(age) + '&body_mass%5Bheight%5D=' + str(height/100) + '&body_mass%5Bfeet%5D=&body_mass%5Binches%5D=&body_mass%5Bweight%5D=' + str(weight) + '&commit=Calculate+BMI')
                 time.sleep(5) # The page has some animation to load
                 driver.save_screenshot('body.png')
@@ -127,7 +127,7 @@ if Part == 'Parts 1-2':
             checker = 1
             if checker == 1:
                 with st.echo(code_location='below'):
-                    driver = webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.GOOGLE, version='91').install())
+                    driver = webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.GOOGLE).install())
                     driver.get(url)
                     element = driver.find_element_by_name('cheightmeter')
                     element.send_keys(str(Info[0]))
