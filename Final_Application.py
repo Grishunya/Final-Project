@@ -24,7 +24,7 @@ import time
 from zipfile import ZipFile
 zip_file = ZipFile('recipes.csv.zip')
 csv_file = zip_file.extractall()
-zip_file_2 = ZipFile('recipes.json.zip')
+zip_file_2 = ZipFile('Recipes.json.zip')
 json_file = zip_file_2.extractall()
 Part = st.sidebar.selectbox('Select the parts one by one:', ('Part 0', 'Parts 1-2', 'Parts 3-4', 'Part 5', 'Part 6'))
 if Part == 'Part 0':
