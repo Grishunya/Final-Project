@@ -73,7 +73,7 @@ if Part == 'Parts 1-2':
     if Ticker:
         st.write('## Part 2: Websites')
         st.write("### I am really sorry for this one, but I couldn't find a way to use selenium with streamlit. I have tried lots and lots of solutions, and have tried to deploy this application more than 30 times, but every time I got some kind of errors.")
-        st.write("#### However, my code is completely fine, and the problem here is the incompatibility of selenium and streamlit when deploying with Heroku because everything had been working just fine when I have tried this code through PyCharm.")
+        st.write("#### However, my code is completely fine, and the problem here is the incompatibility of selenium and streamlit when deploying with Heroku because everything had been working just fine when I have tried to run this code with PyCharm.")
         st.write("#### That's why I want you to open a notebook named 'Websites' and run the code there.")
         st.write("#### Afterward, come back here and continue your journey.")
         st.write("#### I insist on you checking the ipynb file before going any further because this is the chronological order that I have desired my project to work in")
@@ -81,8 +81,6 @@ if Part == 'Parts 1-2':
         st.write('### This is the end of the 2nd part')
 if Part == 'Parts 3-4':
     Calories = st.number_input('Please, specify the amount of calories you were recommended:', )
-    st.write("###### I couldn't get the value from the previous page because multi-page"
-             " working with streamlit doesn't allow it" )
     st.write('## Part 3: Tables')
     with st.echo(code_location='below'):
         Meals = pd.read_csv('recipes.csv')
