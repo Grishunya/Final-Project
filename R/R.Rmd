@@ -1,0 +1,51 @@
+---
+title: "R"
+author: '-'
+date: "6/7/2021"
+output: html_document
+---
+
+```{r}
+library(patchwork)
+library(ggplot2)
+library(tibble)
+```
+
+
+```{r}
+Data = read.csv('Data.csv')
+Tibble_data = as_tibble(Data)
+```
+
+```{r}
+Tibble_data
+```
+
+```{r}
+values = c('Breakfast', 'Breakfast', 'Breakfast', 'Breakfast', 'Lunch', 'Lunch', 'Lunch', 'Lunch', 'Dinner', 'Dinner', 'Dinner', 'Dinner')
+```
+
+
+
+```{r}
+Tibble_data <- Tibble_data %>% add_column(Meal = values) 
+```
+
+
+
+
+
+```{r}
+p1 <- ggplot(Tibble_data, aes(x = rating, y = fat)) + geom_smooth(method = 'loess' , fill = 'lightblue', formula = 'y ~ x')
+p2 <- ggplot(Tibble_data, aes(x = rating, y = calories, fill = Meal)) + geom_boxplot(size = 0.25) + theme(legend.position="none")
+p3 <- ggplot(Tibble_data, aes(x = rating, y = protein, fill = Meal)) + geom_col(width = 0.5)  + coord_polar(theta = 'y')
+
+myplot <- p1 / (p2 | p3) 
+```
+
+```{r}
+png("myplot.png")
+print(myplot)
+dev.off()
+```
+
