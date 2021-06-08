@@ -22,6 +22,10 @@ from selenium.webdriver.support import expected_conditions as EC
 from PIL import Image
 import time
 from zipfile import ZipFile
+zip_file = ZipFile('recipes.csv.zip')
+csv_file = zip_file.extractall()
+zip_file_2 = ZipFile('recipes.json.zip')
+json_file = zip_file_2.extractall()
 Part = st.sidebar.selectbox('Select the parts one by one:', ('Part 0', 'Parts 1-2', 'Parts 3-4', 'Part 5', 'Part 6'))
 if Part == 'Part 0':
     pygame.mixer.init()
