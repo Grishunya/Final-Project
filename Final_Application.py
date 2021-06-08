@@ -259,7 +259,7 @@ if Part == 'Parts 3-4':
                  "and tibble for making tables, which is a part of tidyverse. You can find it in the 'R' folder")
 
         st.image('R/myplot.png')
-        st.write("Here's the code I've ran in R:")
+        st.write("Here's the code I've written in R:")
         st.write("\n"
                  "```{r}"
                  "\n"
