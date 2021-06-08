@@ -110,7 +110,7 @@ if Part == 'Parts 1-2':
         if age != 0:
             with st.echo(code_location='below'):
                 from selenium.webdriver.chrome.options import Options
-                r = os.getcwd() + '/chromedriver'
+                r = ChromeDriverManager().install()
                 options = Options()
                 options.headless = True
                 os.chmod(r, 755)
@@ -133,6 +133,7 @@ if Part == 'Parts 1-2':
             checker = 1
             if checker == 1:
                 with st.echo(code_location='below'):
+                    r = ChromeDriverManager().install()
                     driver = webdriver.Chrome(r, options=options)
                     driver.get(url)
                     element = driver.find_element_by_name('cheightmeter')
