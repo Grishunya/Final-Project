@@ -106,7 +106,7 @@ if Part == 'Parts 3-4':
              " working with streamlit doesn't allow it" )
     st.write('## Part 3: Tables')
     with st.echo(code_location='below'):
-        Meals = pd.read_csv('Recipes.csv')
+        Meals = pd.read_csv('recipes.csv')
         # Data retrieved from https://www.kaggle.com/hugodarwood/epirecipes
         st.write(Meals.sample(2))
     st.write("#### Let's get rid of the most columns that we won't need:")
