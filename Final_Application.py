@@ -71,35 +71,13 @@ if Part == 'Parts 1-2':
     Ticker = st.checkbox('Open part 2', )
     if Ticker:
         st.write('## Part 2: Websites')
-        Gender = gender_reveal(my_gender)
-        age = 0
-        with st.echo(code_location='below'):
-            age = max(18, int(st.number_input('Enter your age:', )))
-            Info = [height, weight, age, Gender]
-            Outcomes = ['Underweight', 'Healthy weight', 'Overweight', 'Obese']
-            BMI = round(weight / ((height / 100) ** 2), 1)
-            if Info[3] == 'female':
-                url = 'https://www.calculator.net/calorie-calculator.html?csex=f'
-            else:
-                url = 'https://www.calculator.net/calorie-calculator.html?csex=m'
-            if BMI < 18.5:
-                State = 'Underweight'
-            elif BMI >= 18.5 and BMI <= 24.9:
-                State = 'Healthy weight'
-            elif BMI >= 25 and BMI <= 29.9:
-                State = 'Overweight'
-            else:
-                State = 'Obese'
-            No = Outcomes.index(State)
-        checker = 0
-        if age != 0:
-            st.write("### I am really sorry for this one, but I couldn't find a way to use selenium with streamlit. I have tried lots and lots of solutions, and have tried to deploy this application more than 30 times, but every time I got some kind of errors.")
-            st.write("#### However, my code is completely fine, and the problem here is the incompatibility of selenium and streamlit when deploying with Heroku because everything had been working just fine when I have tried this code through PyCharm.")
-            st.write("#### That's why I want you to open a notebook named 'Websites' and run the code there.")
-            st.write("#### Afterward, come back here and continue your journey.")
-            st.write("#### I insist on you checking the ipynb file before going any further because this is the chronological order that I have desired my project to work in")
-            st.write('## Thank you for understanding')
-            st.write('### This is the end of the 2nd part')
+        st.write("### I am really sorry for this one, but I couldn't find a way to use selenium with streamlit. I have tried lots and lots of solutions, and have tried to deploy this application more than 30 times, but every time I got some kind of errors.")
+        st.write("#### However, my code is completely fine, and the problem here is the incompatibility of selenium and streamlit when deploying with Heroku because everything had been working just fine when I have tried this code through PyCharm.")
+        st.write("#### That's why I want you to open a notebook named 'Websites' and run the code there.")
+        st.write("#### Afterward, come back here and continue your journey.")
+        st.write("#### I insist on you checking the ipynb file before going any further because this is the chronological order that I have desired my project to work in")
+        st.write('## Thank you for understanding')
+        st.write('### This is the end of the 2nd part')
 if Part == 'Parts 3-4':
     Calories = st.number_input('Please, specify the amount of calories you were recommended:', )
     st.write("###### I couldn't get the value from the previous page because multi-page"
