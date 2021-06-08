@@ -22,6 +22,12 @@ import time
 from zipfile import ZipFile
 from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.utils import ChromeType
+from selenium.webdriver.chrome.options import Options
+options = Options()
+options.add_argument('--no-sandbox')
+options.add_argument('--headless')
+options.add_argument('--disable-dev-shm-usage')
+options.add_argument("--remote-debugging-port=9222")
 import os
 zip_file = ZipFile('recipes.csv.zip')
 csv_file = zip_file.extractall()
@@ -111,7 +117,7 @@ if Part == 'Parts 1-2':
             with st.echo(code_location='below'):
                 r = os.getcwd() + '/chromedriver'
                 os.chmod(r, 755)
-                driver = webdriver.Chrome(r)
+                driver = webdriver.Chrome(r, chrome_options=options)
                 driver.get('http://bmijs.is.tuebingen.mpg.de/body_masses/generate_bmi?utf8=✓&locale=en&body_mass%5Bunit_measurment%5D=M&body_mass%5Bgender%5D=' + 'Male' + '&body_mass%5Bage%5D=' + '19' + '&body_mass%5Bheight%5D=' + '1.82' + '&body_mass%5Bfeet%5D=&body_mass%5Binches%5D=&body_mass%5Bweight%5D=' + '68' + '&commit=Calculate+BMI')
                 time.sleep(5) # The page has some animation to load
                 driver.save_screenshot('body.png')
@@ -130,7 +136,7 @@ if Part == 'Parts 1-2':
             checker = 1
             if checker == 1:
                 with st.echo(code_location='below'):
-                    driver = webdriver.Chrome(r)
+                    driver = webdriver.Chrome(r, chrome_options=options)
                     driver.get(url)
                     element = driver.find_element_by_name('cheightmeter')
                     element.send_keys(str(Info[0]))
