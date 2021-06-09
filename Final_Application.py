@@ -152,12 +152,12 @@ if Part == 'Parts 3-4':
     with st.echo(code_location='below'):
         st.write("### Since I have decided to create this project using streamlit,"
                          "the file may be unreachable to you. "
-                         "That's why I have decided to write it here line by line for you:"
-                         ""
-                         "")
+                         "That's why I have decided to write it here line by line for you:")
         R = open('Meal plan.txt')
+        text = ''
         for line in R:
-            st.write(line)
+            text = text + line
+        st.write(text)
     st.write('### This is the end of the 3rd part')
     Ticker = st.checkbox('Open part 4', )
     if Ticker:
